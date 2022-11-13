@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="Titel">Dashboard</title>
+    <script type="text/javascript" src="index.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+</head>
+<body>
+  <iframe name="dummy" style="display:none;"></iframe>
+  <div class="content">
+
+    <div class="bgimg">
+      <hr>
+      <h1 style="text-align:center" id="DevName">DevName</h1>
+      <hr>
+    </div>   
+
+    <div>
+      <table style="width: 100%" BORDER="0">
+        <tr>
+          <td style="width: 40px">Time:</td>
+          <td id="Epoch"></td>
+          <td style="width: 50px; text-align:right"><input type="image" src="config.png" onclick="ConfigDiv()" style="width: 20px;"></td>
+        </tr>
+      </table>
+      <table style="width: 100%" BORDER="0">
+        <tr>
+          <td style="width: 40px" >Temp1:</td>
+          <td style="width: 30px; text-align:right"id="TEMP1"></td>
+          <td >°C</td>
+          <td style="width: 40px">Temp2:</td>
+          <td style="width: 30px; text-align:right"id="TEMP2"></td>
+          <td>°C</td>
+          <td></td>
+        </tr>
+      </table>
+    </div>
+
+    <div id="ConfigDiv" style="display: none;">
+    <form action="config.post" method="post" target="dummy">
+      <br><b>Config:</b> <hr>
+
+      <table style="width: 99%" BORDER="0">
+        <tr>
+          <td style="width: 90px;">IP:</td>
+          <td style="width: 90px;"id="LOCAL_IP">10.1.2.5</td>
+          <td style="text-align:right"> MAC:</td>
+          <td style="width: 120px;text-align:right" id="MAC"> 45:sd:sd:sd:54:ss</td>
+        </tr>
+        <tr>
+          <td>SSID:</td>
+          <td id="SSID"></td>
+        </tr>
+        </table>
+
+        <table style="width: 99%" BORDER="0">
+        <tr>
+          <td style="width: 90px;">Device Name:</td>
+          <td><input type="text" id="DevNameInput" name="DevName" value=""></td>
+        </tr>
+        <tr>
+          <td>eMS home IP:</td>
+          <td><input type="text" id="eMShomeIP" name="eMShomeIP" value=""></td>
+        </tr>
+        <tr>
+          <td>eMS home PW:</td>
+          <td><input type="text" id="eMShomePW" name="eMShomePW" value=""></td>
+        </tr>         
+       
+      </table>
+      <br>
+      <table style="width: 100%">
+        <tr>
+        <td style="width: 120px;text-align:center"><button type="submit" >Save</button></td>
+        </tr>
+      </table> 
+    </form>
+    </div>
+
+    <div>
+      <br><b>Power consumption:</b> <hr>
+      <table BORDER="0">
+        <tr>
+          <th style="text-align:right; width: 50px">L1</th>
+          <th></th>
+          <th style="text-align:right; width: 50px">L2</th>
+          <th></th>
+          <th style="text-align:right; width: 50px">L3</th>
+          <th></th>
+          <th style="text-align:right; width: 50px">Total</th>
+          <th></th>
+        </tr>
+        <tr>
+          <td style="text-align:right" id="L1_W">100</td>
+          <td style="text-align:left">W</td>
+          <td style="text-align:right" id="L2_W">100</td>
+          <td style="text-align:left">W</td>
+          <td style="text-align:right" id="L3_W">100</td>
+          <td style="text-align:left ;width: 60px">W</td>
+          <td style="text-align:right" id="ALL_W">100</td>
+          <td style="text-align:left">W</td>
+        </tr>
+      </table> 
+    </div>
+
+    <form id="output" action="output.post" method="post" target="dummy">
+      <br><b>Output:</b> <hr><br>
+        <div> 
+          <table  style="width: 100%" BORDER="0">
+            <tr>
+              <th style="text-align:center">Output 1</th>
+              <th style="text-align:center">Output 2</th>
+              <th style="text-align:center">Output 3</th>
+              <th style="text-align:center">Output 4</th>
+            </tr>
+            <tr>
+              <td style="text-align:center">  
+                <label class="switch">
+                  <input type="checkbox" id="OUT1" name="OUT1" onclick="this.form.submit()">
+                  <span class="slider"></span>
+                </label>
+              </td>
+              <td style="text-align:center">  
+                <label class="switch">
+                  <input type="checkbox" id="OUT2" name="OUT2" onclick="this.form.submit()">
+                  <span class="slider"></span>
+                </label>
+              </td>
+              <td style="text-align:center">  
+                <label class="switch">
+                  <input type="checkbox" id="OUT3" name="OUT3" onclick="this.form.submit()">
+                  <span class="slider"></span>
+                </label>
+              </td>
+              <td style="text-align:center">  
+                <label class="switch">
+                  <input type="checkbox" id="OUT4" name="OUT4" onclick="this.form.submit()">
+                  <span class="slider"></span>
+                </label>
+              </td>
+            </tr>
+            
+          </table> 
+        </div>
+    </form>
+
+
+    <form id="settings" action="settings.post" method="post" target="dummy">
+      <br><b>Switching rules:</b> <hr>
+      <table BORDER="0">
+        <tr>
+          <th style="width: 30px;">Out</th>
+          <th style="width: 30px;">Line</th>
+          <th style="width: 50px; text-align:center">On @</th>
+          <th style="width: 40px;"></th>
+          <th style="width: 50px; text-align:center">Off @</th>
+          <th style="width: 40px;"></th>
+          <th style="width: 50px;">Enabled</th>
+        </tr>
+        <tr>
+          <td>1.</td>
+          <td>L1:</td>
+          <td><input type="number" max="0" id="R1_ON" name="R1_ON" value="" style="width: 60px;"></td>
+          <td>W</td>
+          <td><input type="number" max="0" id="R1_OFF" name="R1_OFF" value="" style="width: 60px;"></td>
+          <td>W</td>
+          <td style="text-align:center"><input type="checkbox" id="R1_EN" name="R1_EN"></td>
+        </tr>
+        <tr>
+          <td>2.</td>
+          <td>L2:</td>
+          <td><input type="number" max="0" id="R2_ON" name="R2_ON" value="" style="width: 60px;"></td>
+          <td>W</td>
+          <td><input type="number" max="0" id="R2_OFF" name="R2_OFF" value="" style="width: 60px;"></td>
+          <td>W</td>
+          <td style="text-align:center"><input type="checkbox" id="R2_EN" name="R2_EN"></td>
+        </tr>
+        <tr>
+          <td>3.</td>
+          <td>L3:</td>
+          <td><input type="number" max="0" id="R3_ON" name="R3_ON" value="" style="width: 60px;"></td>
+          <td>W</td>
+          <td><input type="number" max="0" id="R3_OFF" name="R3_OFF"  value="" style="width: 60px;"></td>
+          <td>W</td>
+          <td style="text-align:center"><input type="checkbox" id="R3_EN" name="R3_EN" ></td>
+        </tr>
+        <tr>
+          <td>4.</td>
+          <td>ALL:</td>
+          <td><input type="number" max="0" id="R4_ON" name="R4_ON" value="" style="width: 60px;"></td>
+          <td>W</td>
+          <td><input type="number" max="0" id="R4_OFF" name="R4_OFF" value="" style="width: 60px;"></td>
+          <td>W</td>
+          <td style="text-align:center"><input type="checkbox" id="R4_EN" name="R4_EN"></td>
+        </tr>
+      </table> 
+      <br>
+      <br>
+      
+      <table>
+        <tr>
+            <td style="width: 70px;">On Delay:</td>
+            <td><input type="number" min="0" max="9999" id="ON_DELAY" name="ON_DELAY" value="" style="width: 50px;"></td>
+            <td>s</td>
+        </tr>
+        <tr>
+          <td style="width: 70px;">Off Delay:</td>
+          <td><input type="number" min="0" max="9999" id="OFF_DELAY" name="OFF_DELAY" value="" style="width: 50px;"></td>
+          <td>s</td>
+      </tr>
+      </table> 
+      <br>
+      <table style="width: 100%">
+        <tr>
+          <td style=" text-align:center"> <button type="submit" >Save</button></td>
+        </tr>
+      </table> 
+    </form>
+    <br> <hr>
+  </div>
+  
+  <footer div class="foot">Powered by T.Hanß (c)2022</div>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="Titel">Dashboard</title>
+    <script type="text/javascript" src="index.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+</head>
+<body>
+  <iframe name="dummy" style="display:none;"></iframe>
+  <div class="content">
+
+    <div class="bgimg">
+      <hr>
+      <h1 style="text-align:center" id="DevName">DevName</h1>
+      <hr>
+    </div>   
+
+    <div>
+    <form action="setup.post" method="post" target="dummy">
+      <br>
+      <div>
+        <b>Setup:</b> <span style="float:right;">MAC:&nbsp; &nbsp; <span id="MAC">45:sd:sd:sd:54:ss</span></span> 
+      </div><hr>
+      <table style="width: 100%" BORDER="0">
+        <tr>
+            <td style="width: 100px;">SSID:</td>
+            <td><input type="text" id="SSID" name="SSID" value=""></td>
+        </tr>
+        <tr>
+            <td>PSK:</td>
+            <td><input type="text" id="PSK" name="PSK" value=""> </td>
+        </tr>
+        <tr>
+            <td>Device Name:</td>
+            <td><input type="text" id="DevNameInput" name="DevName" value=""></td>
+        </tr>
+        <tr>
+            <td>eMS home IP:</td>
+            <td><input type="text" id="eMShomeIP" name="eMShomeIP" value=""></td>
+        </tr>
+        <tr>
+            <td>eMS home PW:</td>
+            <td><input type="text" id="eMShomePW" name="eMShomePW" value=""></td>
+        </tr>         
+      </table>
+      <br>
+      <button type="submit" >Save</button> 
+    </form>
+    </div>
+
+    
+    <br> <hr>
+  </div>
+  
+  <footer div class="foot">Powered by T.Hanß (c)2022</div>
+  </footer>
+</body>
+</html>
