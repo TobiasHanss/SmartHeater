@@ -9,7 +9,8 @@ using namespace websockets;
 
 //The Server sends data all 250ms. In order to reduce the CPU load skip ever x msg
 #define SKIP_EVER_x_MSG  4 
-
+#define TASK_INTERVAL_ms 100//ms
+#define COM_TIMEOUT_ms 3000
 class eMShome
 {
 public:
@@ -49,6 +50,8 @@ private:
   void updateDataPoint(uint64_t Key, uint64_t Value);
   void printMeasurmen (void); 
 
+  void ClearData(void);
+
   String     m_IP;      // SmartMeter IP
   String     m_PW;      // SmartMeter PW
 
@@ -56,6 +59,7 @@ private:
   String     m_buf;     // String buffer used to decode the Values
   uint32_t   m_pos;     // Possiont of the buffer used to decode the Values
  
+
   uint64_t   m_Seconds; // Timestamp send by eMShome
   uint32_t   m_NanoSec; // Timestamp send by eMShome
   String     m_Name;    // Name send by eMShome: always "smart_meter"

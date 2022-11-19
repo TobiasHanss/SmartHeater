@@ -141,7 +141,7 @@ void eMShome::taskHandler (void * ClassPointer)
     while(1){
         //printStack();
         static_cast<eMShome*> (ClassPointer)->update();
-        delay(250);
+        delay(TASK_INTERVAL_ms);
     }
 }
 
@@ -149,6 +149,8 @@ void eMShome::taskHandler (void * ClassPointer)
 //************************************************************
 void eMShome::update(void)
 {
+  static uint8_t TimeoutCounter = 0; // Timeout for getting new date
+  static uint64_t oldSeconds = 0;
 
   if (m_Conneced)
   {
@@ -163,6 +165,20 @@ void eMShome::update(void)
   {
     connect();
   }
+
+  if (oldSeconds != m_Seconds)
+  {
+    TimeoutCounter = 0;
+  }
+  oldSeconds = m_Seconds;
+  if (TimeoutCounter++ > (COM_TIMEOUT_ms / TASK_INTERVAL_ms)) //3s
+  {
+    ClearData();
+    m_Conneced = false;
+    connect();
+  }
+  
+
 }
 
 //************************************************************
@@ -518,4 +534,16 @@ int32_t eMShome::getActivePower_W(uint8_t Line)
   }
 
   return  (dataPoint[Index].Value / pow(10,dataPoint[Index].PowerOfTen))*dataPoint[Index].Sign;
+}
+
+
+//************************************************************
+//************************************************************
+// Line: 0 => Total; 1 => L1; 3 => L3; 3 => L3
+void eMShome::ClearData(void)
+{
+  for (int i = 0 ; i < 8;i++)
+  {
+   dataPoint[i].Value = 0;
+  }
 }

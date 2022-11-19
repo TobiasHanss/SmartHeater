@@ -181,7 +181,8 @@ void WebIf::onRequestData(void)
     oJSON["OUT3"] = Outputs.getOnOff(2);
     oJSON["OUT4"] = Outputs.getOnOff(3);  
     oJSON["TEMP1"] = Logging.getSensor(0);     
-    oJSON["TEMP2"] = Logging.getSensor(1);       
+    oJSON["TEMP2"] = Logging.getSensor(1); 
+    oJSON["Uptime"] = millis()/100;          
     String buf;
     serializeJson(oJSON,buf);
     m_oServer->send(200, "application/json", buf);

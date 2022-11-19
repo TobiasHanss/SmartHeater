@@ -1,24 +1,16 @@
-# ABL eMS home smart plug
+# ABL eMS home smart heater
 ## _A ESP32 project_
 
-This project is written for a smart plug to turn on and off an 
-electrical load depending on the excess energy from the photovoltaic array. The smart plug can fully controlled and configured via its own WebPage. 
+This project is written for a smart plug to turn on and off an electrical load depending on the excess energy from the photovoltaic array. The smart heater can fully controlled and configured via its own WebPage.  
 
 ![N|Solid](WebIF.png)
 
 ## Function:
-In my case, the smart meter was installed directly after the utility meter in order to see if the house is providing or receiving power.
-The smart plug opens a connection to the smart meter to get this information.The socket is then switched on and off via adjustable threshold values. Mains phase and an on/off delay can be selected.
+In my case, the smart meter was installed directly after the utility meter in order to see if the house is providing or receiving power.The smart heater opens a connection to the meter to get this information. The smart heater has four relay. A mains phase is assigned to each relay. The fourth relay refers to the total consumption. They switching on and off via adjustable current consumption / delivery threshold values.
 
 ## Hardware:
-I bought a "Usmart SP1-2" smart plug, removed its radio module and "installed" a preprogrammed ESP32-Wroom Module instead.
-A preprogrammed modul can easily updated over the air (Arduion - OTA).
+Own small PCB for a standard DIN rail housing.
 
-## Setup:
-To set up the plug, press and hold the button while plugging it in. After 5s the button flashes blue/red and a WLAN (SSID: SmartPlugX) was opened.
-Navigate to 192.168.4.1 and enter your network credentials, click save and cycle the plug.
-Check your DHCP leases from your wireless router to find out the plug's new IP address.   
-  
 ## eMS API description:
 Since ABL didn't provide me with an API for its eMS home Smartmeter, I reverse engineered the web interface and poured it into C++ code.
 I used eMS home software version V1.1 (https://www.ablmobility.de/de/emobility-blog/softwareupdateemshome.php)
@@ -32,5 +24,9 @@ It's all encapsulated into the eMShome class.
 It's a MS Visual Studio Code project using the Platform IO plugin.
 
 Extern libs:
+- paulstoffregen/OneWire@^2.3.7
+- milesburton/DallasTemperature@^3.11.0
+- knolleary/PubSubClient@^2.8
 - bblanchon/ArduinoJson@^6.19.4
-- gilmaimon/ArduinoWebsockets@^0.5.3 --->> NOTE: This lib was altert in order to get it working with the eMS home
+- gilmaimon/ArduinoWebsockets@^0.5.3 --->> NOTE: This lib was altert 
+in order to get it working with the eMS home
