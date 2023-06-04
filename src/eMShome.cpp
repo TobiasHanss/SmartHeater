@@ -94,11 +94,11 @@ eMShome::eMShome(String IP, String PW)
   // install Callback
   m_oWSClient.onMessage([&](WebsocketsMessage message)
   { 
-    if (m_SkipCounter ++ >= SKIP_EVER_x_MSG)
+   // if (m_SkipCounter ++ >= SKIP_EVER_x_MSG)
     {
       decodeMessage(message.data());
       //printMeasurmen();
-      m_SkipCounter = 0;
+     // m_SkipCounter = 0;
     }
   }
   );
