@@ -2,10 +2,12 @@
 #include "output.h"
 #include "eMShome.h"
 #include "settings.h"
+#include "logging.h"
 #include "task.h"
 
 extern eMShome SmartMeter;
 extern CSettings Settings;
+extern CLogging Logging;
 
 COutput::COutput(void)
 {
@@ -66,7 +68,17 @@ void COutput::checkRules(void)
     char nRx_ON[6] = {"R1_ON"};
     char nRx_OFF[7] = {"R1_OFF"};   
 
-    for (uint8_t i = 0; i < NO_OF_OUTPUT; i++)
+
+    int32_t iTotalPower = SmartMeter.getActivePower_W(0); //Total Power is on index 0
+    int32_t iTotalPowerOn = Settings.getInt("nR4_ON");
+    int32_t iTotalPowerOff = Settings.getInt("nR4_OFF"); 
+
+    int16_t currentTemp = Logging.getSensor(0);
+    int16_t tempOnAt = Settings.getInt("ON_TEMP");
+    int16_t tempOffAt = Settings.getInt("OFF_TEMP");
+
+
+    for (uint8_t i = 0; i < NO_OF_OUTPUT-1; i++)
     {
         bEnabled = Settings.getStr(nRx_EN) == "on" ? true : false;
         nRx_EN[1] += 1; //Increment Rx_EN
@@ -74,27 +86,24 @@ void COutput::checkRules(void)
         nRx_ON[1] += 1; //Increment Rx_ON
         iOffAt = Settings.getInt(nRx_OFF);
         nRx_OFF[1] += 1; //Increment Rx_OFF
-        
-        if (i == 3)
-            iPower = SmartMeter.getActivePower_W(0); //Total Power is on index 0
-        else
-            iPower = SmartMeter.getActivePower_W(i+1);
+        iPower = SmartMeter.getActivePower_W(i+1);
 
         if (bEnabled)
         {
             //Serial.printf("OutNo:%d State:%d OnAt:%d OffAt:%d Power:%d \n",i,m_bOutput[i],iOnAt,iOffAt,iPower);
             if (m_bOutput[i])
             {
-                if (iPower >= iOffAt)
+                if ((iPower >= iOffAt) || (iTotalPower >= iTotalPowerOff) || ( currentTemp >= tempOffAt ))
                 {
                     m_bOutput[i] = false;
                 }
             }
             else
             {
-                if (iPower <= iOnAt)
+                if ((iPower <= iOnAt) && (iTotalPower <= iTotalPowerOn) && ( currentTemp <= tempOnAt ))
                 {
                     m_bOutput[i] = true;
+                    iTotalPower -= iOnAt;
                 }
             }
         
@@ -108,6 +117,8 @@ void COutput::checkRules(void)
                     if (m_iDelayCounter[i] >= OffDelay) 
                     {
                         m_bOutput_Old[i]= true;
+                        setHW(3,true);
+                        delay(100);
                         setHW(i,true);
                     }
                 }
@@ -118,6 +129,7 @@ void COutput::checkRules(void)
                     {
                         m_bOutput_Old[i]= false;
                         setHW(i,false);
+                        setHW(3,(m_bOutput[0] || m_bOutput[1] || m_bOutput[2]));  
                     }
                 }
             }

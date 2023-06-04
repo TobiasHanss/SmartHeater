@@ -24,8 +24,5 @@ private:
     void listFiles(void);    
     WebServer *m_oServer;
 
-    bool m_Out1;
-    bool m_Out2;
-    bool m_Out3;
 };
 #endif

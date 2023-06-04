@@ -8,9 +8,8 @@
 using namespace websockets;
 
 //The Server sends data all 250ms. In order to reduce the CPU load skip ever x msg
-#define SKIP_EVER_x_MSG  4 
 #define TASK_INTERVAL_ms 100//ms
-#define COM_TIMEOUT_ms 3000
+#define COM_TIMEOUT_ms 10000
 class eMShome
 {
 public:

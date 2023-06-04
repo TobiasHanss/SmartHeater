@@ -24,15 +24,18 @@
         <tr>
           <td style="width: 40px">Time:</td>
           <td id="Epoch"></td>
+          <td style="width: 40px">UpTime:</td>
+          <td id="Uptime"></td>
+          <td id="Uptime">min.</td>
           <td style="width: 50px; text-align:right"><input type="image" src="config.png" onclick="ConfigDiv()" style="width: 20px;"></td>
         </tr>
       </table>
       <table style="width: 100%" BORDER="0">
         <tr>
-          <td style="width: 40px" >Temp1:</td>
+          <td style="width: 80px">Bottom Temp:</td>
           <td style="width: 30px; text-align:right"id="TEMP1"></td>
           <td >°C</td>
-          <td style="width: 40px">Temp2:</td>
+          <td style="width: 70px">Top Temp:</td>
           <td style="width: 30px; text-align:right"id="TEMP2"></td>
           <td>°C</td>
           <td></td>
@@ -203,14 +206,25 @@
       
       <table>
         <tr>
-            <td style="width: 70px;">On Delay:</td>
-            <td><input type="number" min="0" max="9999" id="ON_DELAY" name="ON_DELAY" value="" style="width: 50px;"></td>
-            <td>s</td>
+          <td style="width: 70px;">On Delay:</td>
+          <td><input type="number" min="0" max="9999" id="ON_DELAY" name="ON_DELAY" value="" style="width: 50px;"></td>
+          <td>s</td>
+          <td style="width: 40px;">&nbsp;</td>
+          
+          <td style="width: 70px;">On Temp:</td>
+          <td><input type="number" min="40" max="70" id="ON_TEMP" name="ON_TEMP" value="" style="width: 50px;"></td>
+          <td>°C</td>
         </tr>
         <tr>
           <td style="width: 70px;">Off Delay:</td>
           <td><input type="number" min="0" max="9999" id="OFF_DELAY" name="OFF_DELAY" value="" style="width: 50px;"></td>
           <td>s</td>
+
+          <td style="width: 40px;">&nbsp;</td>
+          
+          <td style="width: 70px;">Off Temp:</td>
+          <td><input type="number" min="40" max="70" id="OFF_TEMP" name="OFF_TEMP" value="" style="width: 50px;"></td>
+          <td>°C</td>
       </tr>
       </table> 
       <br>

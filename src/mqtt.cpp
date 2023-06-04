@@ -84,8 +84,8 @@ void Cmqtt::update (void )
     reconnect();
     client.loop();
    
-    publish("WaterTemp", Logging.getSensor(0));
-    publish("HeaterTemp", Logging.getSensor(1));
+    publish("WaterTemp", -127);//Logging.getSensor(0));
+    publish("HeaterTemp", -127);//Logging.getSensor(1));
     publish("LineTotal", SmartMeter.getActivePower_W(0));
     publish("Line1", SmartMeter.getActivePower_W(1));
     publish("Line2", SmartMeter.getActivePower_W(2));

@@ -10,7 +10,7 @@
 #include "output.h"
 #include "logging.h"
 #include "task.h"
-#include "mqtt.h"
+//#include "mqtt.h"
 
 #define WDT_TIMEOUT_s  10
 
@@ -23,7 +23,7 @@ COutput Outputs;
 WebIf   WebInterface(80);
 eMShome SmartMeter(Config.get("eMShomeIP"),Config.get("eMShomePW"));
 CLogging Logging;
-Cmqtt     mqtt;
+//Cmqtt     mqtt;
 
 
 bool bInSetupMode = false;

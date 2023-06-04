@@ -94,12 +94,7 @@ eMShome::eMShome(String IP, String PW)
   // install Callback
   m_oWSClient.onMessage([&](WebsocketsMessage message)
   { 
-   // if (m_SkipCounter ++ >= SKIP_EVER_x_MSG)
-    {
       decodeMessage(message.data());
-      //printMeasurmen();
-     // m_SkipCounter = 0;
-    }
   }
   );
 
@@ -173,9 +168,12 @@ void eMShome::update(void)
   oldSeconds = m_Seconds;
   if (TimeoutCounter++ > (COM_TIMEOUT_ms / TASK_INTERVAL_ms)) //3s
   {
-    ClearData();
-    m_Conneced = false;
-    connect();
+	
+    ESP.restart();
+
+    //ClearData();
+    //m_Conneced = false;
+    //connect();
   }
   
 

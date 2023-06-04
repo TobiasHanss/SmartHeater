@@ -15,8 +15,8 @@ public:
     void begin(void);
 
     int16_t getSensor(uint8_t No) {return m_nValues[No];}
-
-private:
+ 
+ private:
     void Update(void);
     void readTemp(void);
     static void taskHandler (void * ClassPointer);
