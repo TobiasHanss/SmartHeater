@@ -206,7 +206,7 @@ bool eMShome::connect(void)
   } 
   else 
   {
-      Serial.printf("%s(): Can't connected to WebSocked!\n",__func__);
+      Serial.printf("%s(): Can't connected to WebSocked! (IP:%s)\n",__func__,m_IP.c_str());
   }
   return m_Conneced;
 }

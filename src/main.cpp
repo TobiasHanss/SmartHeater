@@ -17,7 +17,7 @@
 
 CSettings Settings("/settings.json",1024);
 CSettings Config("/config.json",400);
-CSettings Secure("/secure.json",100);
+CSettings Secure("/secret.json",100);
 
 COutput Outputs;
 WebIf   WebInterface(80);
@@ -133,12 +133,16 @@ void setup()
 void loop() 
 {
 
-    if(WiFi.status() != WL_CONNECTED) 
-    {
-       WiFi.reconnect();
-    }
+  if(WiFi.status() != WL_CONNECTED) 
+  {
+    Serial.println("WiFi not connected!");
+    WiFi.reconnect();
+  }
 
-
+  if (((millis()/1000)/60) > 30)
+  {
+    ESP.restart();
+  }
 
 
 
